@@ -19,6 +19,8 @@ public class RunAnalysis {
 		log.info("Loading files...");
 		List<ShuffleState> shuffles = new TrialReader().readDeck(new File("data/trial1.txt"));
 		shuffles.addAll(new TrialReader().readDeck(new File("data/trial1.2.txt")));
+		shuffles.addAll(new TrialReader().readDeck(new File("data/trial1.3.txt")));
+		shuffles.addAll(new TrialReader().readDeck(new File("data/trial1.4.txt")));
 		log.info("Checking data entry...");
 		for (ShuffleState shuffleState : shuffles) {
 			log.info("\tChecking..." + shuffleState.getDescription());
