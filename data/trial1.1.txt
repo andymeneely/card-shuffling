@@ -3,7 +3,60 @@
 # Started with a deck Ace, 2, 3, ..., King. Clubs, then Diamonds, Hearts, Spades. 
 # Each "Rifle" represents shuffling the deck as it was, then capturing the order
 # So for example, Rifle 21 means the deck has been shuffled 21 times since the original rifle shuffle.
-# The photos are ordered with the top card being upper left. Then going down, and then left to right. 
+# The photos are ordered with the top card being upper left. Then going down, and then left to right.
+:Rifle 0
+ac
+2c
+3c
+4c
+5c
+6c
+7c
+8c
+9c
+10c
+jc
+qc
+kc
+ad
+2d
+3d
+4d
+5d
+6d
+7d
+8d
+9d
+10d
+jd
+qd
+kd
+ah
+2h
+3h
+4h
+5h
+6h
+7h
+8h
+9h
+10h
+jh
+qh
+kh
+as
+2s
+3s
+4s
+5s
+6s
+7s
+8s
+9s
+10s
+js
+qs
+ks
 :Rifle 1
 ac
 2c

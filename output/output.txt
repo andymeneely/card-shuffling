@@ -482,3 +482,43 @@
 74   [main] INFO   - 	 	Checking...Rifle 18
 75   [main] INFO   - 	 	Checking...Rifle 19
 75   [main] INFO   - 	 	Checking...Rifle 21
+0    [main] INFO   - 	 Loading files...
+73   [main] INFO   - 	 Checking data entry...
+74   [main] INFO   - 	 	Checking...Rifle 1
+78   [main] INFO   - 	 	Checking...Rifle 3
+78   [main] INFO   - 	 	Checking...Rifle 4
+79   [main] INFO   - 	 	Checking...Rifle 5
+79   [main] INFO   - 	 	Checking...Rifle 6
+81   [main] INFO   - 	 	Checking...Rifle 7
+81   [main] INFO   - 	 	Checking...Rifle 8
+82   [main] INFO   - 	 	Checking...Rifle 9
+82   [main] INFO   - 	 	Checking...Rifle 10
+82   [main] INFO   - 	 	Checking... Rifle 11
+83   [main] INFO   - 	 	Checking... Rifle 12
+83   [main] INFO   - 	 	Checking...Rifle 13
+83   [main] INFO   - 	 	Checking...Rifle 15
+84   [main] INFO   - 	 	Checking...Rifle 16
+84   [main] INFO   - 	 	Checking...Rifle 17
+85   [main] INFO   - 	 	Checking...Rifle 18
+85   [main] INFO   - 	 	Checking...Rifle 19
+85   [main] INFO   - 	 	Checking...Rifle 21
+0    [main] INFO   - 	 Loading files...
+55   [main] INFO   - 	 Checking data entry...
+55   [main] INFO   - 	 	Checking...Rifle 1
+57   [main] INFO   - 	 	Checking...Rifle 3
+59   [main] INFO   - 	 	Checking...Rifle 4
+59   [main] INFO   - 	 	Checking...Rifle 5
+60   [main] INFO   - 	 	Checking...Rifle 6
+60   [main] INFO   - 	 	Checking...Rifle 7
+61   [main] INFO   - 	 	Checking...Rifle 8
+61   [main] INFO   - 	 	Checking...Rifle 9
+61   [main] INFO   - 	 	Checking...Rifle 10
+62   [main] INFO   - 	 	Checking... Rifle 11
+62   [main] INFO   - 	 	Checking... Rifle 12
+62   [main] INFO   - 	 	Checking...Rifle 13
+63   [main] INFO   - 	 	Checking...Rifle 15
+63   [main] INFO   - 	 	Checking...Rifle 16
+63   [main] INFO   - 	 	Checking...Rifle 17
+64   [main] INFO   - 	 	Checking...Rifle 18
+64   [main] INFO   - 	 	Checking...Rifle 19
+64   [main] INFO   - 	 	Checking...Rifle 20
