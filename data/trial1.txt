@@ -57,5 +57,3 @@ js
 qs
 ks
 jd
-:Rifle 2
-
