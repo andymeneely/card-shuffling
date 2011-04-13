@@ -1,0 +1,61 @@
+# Trial 1
+# Collected April 13th, 2011
+# Started with a deck Ace, 2, 3, ..., King. Clubs, then Diamonds, Hearts, Spades. 
+# Each "Rifle" represents shuffling the deck as it was, then capturing the order
+# So for example, Rifle 21 means the deck has been shuffled 21 times since the original rifle shuffle.
+# The photos are ordered with the top card being upper left. Then going down, and then left to right. 
+:Rifle 1
+ac
+2c
+3c
+4c
+5c
+6c
+qd
+kd
+7c
+8c
+ah
+2h
+3h
+9c
+4h
+5h
+10c
+6h
+7h
+jc
+8h
+9h
+qc
+kc
+ad
+10h
+jh
+2d
+3d
+qh
+kh
+as
+4d
+2s
+3s
+5d
+4s
+5s
+6d
+6s
+7d
+8d
+7s
+8s
+9d
+9s
+10s
+js
+10d
+qs
+ks
+jd
+:Rifle 2
+
