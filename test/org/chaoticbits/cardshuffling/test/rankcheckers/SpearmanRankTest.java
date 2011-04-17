@@ -1,6 +1,5 @@
 package org.chaoticbits.cardshuffling.test.rankcheckers;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.List;
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
 import org.chaoticbits.cardshuffling.cards.Suit;
 import org.chaoticbits.cardshuffling.cards.Value;
-import org.chaoticbits.cardshuffling.rankcheckers.DeckDifference;
 import org.chaoticbits.cardshuffling.rankcheckers.IRankChecker;
 import org.chaoticbits.cardshuffling.rankcheckers.SpearmanRankCompare;
 import org.junit.Test;

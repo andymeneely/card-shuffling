@@ -8,7 +8,7 @@ public class DeckDifference implements IRankChecker {
 
 	/**
 	 * Compares the two decks slot by slot to see how similar or different they are. Returns the number of
-	 * cards different in each slot. Output ranges from 0 to 52. 
+	 * cards different in each slot. Output ranges from 0 to 52.
 	 * 
 	 */
 	@Override
@@ -20,5 +20,10 @@ public class DeckDifference implements IRankChecker {
 			difference += (before.get(i).equals(after.get(i)) ? 0.0 : 1.0);
 		}
 		return difference;
+	}
+
+	@Override
+	public String name() {
+		return "Deck Difference";
 	}
 }

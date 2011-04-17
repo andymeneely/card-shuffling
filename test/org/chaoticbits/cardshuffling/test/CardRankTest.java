@@ -1,6 +1,6 @@
 package org.chaoticbits.cardshuffling.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
 import org.chaoticbits.cardshuffling.cards.Suit;

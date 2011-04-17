@@ -48,4 +48,9 @@ public class BridgeHandCompare implements IRankChecker {
 
 	}
 
+	@Override
+	public String name() {
+		return "Bridge hand difference";
+	}
+
 }

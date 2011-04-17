@@ -1,8 +1,6 @@
 package org.chaoticbits.cardshuffling.rankcheckers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
 
@@ -39,5 +37,10 @@ public class SpearmanRankCompare implements IRankChecker {
 			sum += square;
 		}
 		return sum;
+	}
+
+	@Override
+	public String name() {
+		return "Spearman Rank";
 	}
 }
