@@ -15,6 +15,8 @@ import org.junit.Test;
 
 public class DeckDifferenceTest {
 
+	private IRankChecker checker = new DeckDifference();
+
 	private List<PlayingCard> newDeck() {
 		ArrayList<PlayingCard> newDeck = new ArrayList<PlayingCard>(52);
 		for (Suit suit : Suit.values()) {
@@ -29,7 +31,6 @@ public class DeckDifferenceTest {
 	public void noDifference() throws Exception {
 		List<PlayingCard> newDeck1 = newDeck();
 		List<PlayingCard> newDeck2 = newDeck();
-		IRankChecker checker = new DeckDifference();
 		assertEquals(0.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
 	}
 
@@ -39,7 +40,6 @@ public class DeckDifferenceTest {
 		List<PlayingCard> newDeck2 = newDeck();
 		newDeck2.set(0, newDeck1.get(1));
 		newDeck2.set(1, newDeck1.get(0));
-		IRankChecker checker = new DeckDifference();
 		assertEquals(2.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
 	}
 
@@ -50,7 +50,6 @@ public class DeckDifferenceTest {
 		newDeck2.set(0, newDeck1.get(1));
 		newDeck2.set(1, newDeck1.get(2));
 		newDeck2.set(2, newDeck1.get(0));
-		IRankChecker checker = new DeckDifference();
 		assertEquals(3.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
 	}
 
@@ -60,7 +59,6 @@ public class DeckDifferenceTest {
 		List<PlayingCard> newDeck2 = newDeck();
 		newDeck2.set(0, new PlayingCard(Value.KING, Suit.SPADES));
 		newDeck2.set(51, new PlayingCard(Value.ACE, Suit.CLUBS));
-		IRankChecker checker = new DeckDifference();
 		assertEquals(2.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
 	}
 
@@ -69,7 +67,6 @@ public class DeckDifferenceTest {
 		List<PlayingCard> newDeck1 = newDeck();
 		List<PlayingCard> newDeck2 = newDeck();
 		Collections.reverse(newDeck2);
-		IRankChecker checker = new DeckDifference();
 		assertEquals(52.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
 	}
 }
