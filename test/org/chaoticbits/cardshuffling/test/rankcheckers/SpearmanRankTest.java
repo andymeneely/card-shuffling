@@ -72,7 +72,7 @@ public class SpearmanRankTest {
 		Collections.reverse(newDeck2);
 		assertEquals(-1.0, checker.compareRanks(newDeck1, newDeck2), 0.000001);
 	}
-	
+
 	@Test
 	public void fourSimpleCards() throws Exception {
 		List<PlayingCard> newDeck1 = new ArrayList<PlayingCard>();
@@ -89,6 +89,37 @@ public class SpearmanRankTest {
 		newDeck2.add(new PlayingCard(Value.SIX, Suit.CLUBS));
 		newDeck2.add(new PlayingCard(Value.THREE, Suit.CLUBS));
 		newDeck2.add(new PlayingCard(Value.FIVE, Suit.CLUBS));
-		assertEquals(-0.8, checker.compareRanks(newDeck1, newDeck2), 0.000001);
+		assertEquals(-0.3714286, checker.compareRanks(newDeck1, newDeck2), 0.000001);
+	}
+
+	@Test
+	public void longerExample() throws Exception {
+		// Adapted from the Wikipedia example:
+		// http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient#Example
+		List<PlayingCard> newDeck1 = new ArrayList<PlayingCard>();
+		newDeck1.add(new PlayingCard(Value.SEVEN, Suit.CLUBS)); // 106
+		newDeck1.add(new PlayingCard(Value.ACE, Suit.CLUBS)); // 86
+		newDeck1.add(new PlayingCard(Value.FOUR, Suit.CLUBS)); // 100
+		newDeck1.add(new PlayingCard(Value.FIVE, Suit.CLUBS)); // 101
+		newDeck1.add(new PlayingCard(Value.THREE, Suit.CLUBS)); // 99
+		newDeck1.add(new PlayingCard(Value.SIX, Suit.CLUBS)); // 103
+		newDeck1.add(new PlayingCard(Value.TWO, Suit.CLUBS)); // 97
+		newDeck1.add(new PlayingCard(Value.TEN, Suit.CLUBS)); // 113
+		newDeck1.add(new PlayingCard(Value.NINE, Suit.CLUBS)); // 112
+		newDeck1.add(new PlayingCard(Value.EIGHT, Suit.CLUBS)); // 110
+
+		List<PlayingCard> newDeck2 = new ArrayList<PlayingCard>();
+		newDeck2.add(new PlayingCard(Value.THREE, Suit.CLUBS)); // 7
+		newDeck2.add(new PlayingCard(Value.ACE, Suit.CLUBS)); // 0
+		newDeck2.add(new PlayingCard(Value.SEVEN, Suit.CLUBS)); // 27
+		newDeck2.add(new PlayingCard(Value.TEN, Suit.CLUBS)); // 50
+		newDeck2.add(new PlayingCard(Value.EIGHT, Suit.CLUBS)); // 28
+		newDeck2.add(new PlayingCard(Value.NINE, Suit.CLUBS)); // 29
+		newDeck2.add(new PlayingCard(Value.SIX, Suit.CLUBS)); // 20
+		newDeck2.add(new PlayingCard(Value.FOUR, Suit.CLUBS)); // 12
+		newDeck2.add(new PlayingCard(Value.TWO, Suit.CLUBS)); // 6
+		newDeck2.add(new PlayingCard(Value.FIVE, Suit.CLUBS)); // 17
+		
+		assertEquals(-0.1757575, checker.compareRanks(newDeck1, newDeck2), 0.000001);
 	}
 }

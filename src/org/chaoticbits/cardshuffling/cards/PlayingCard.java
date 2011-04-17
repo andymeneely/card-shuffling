@@ -2,7 +2,7 @@ package org.chaoticbits.cardshuffling.cards;
 
 import org.chaoticbits.cardshuffling.entry.DataEntryException;
 
-public class PlayingCard {
+public class PlayingCard implements Comparable<PlayingCard> {
 	private Suit suit;
 	private Value value;
 
@@ -54,5 +54,17 @@ public class PlayingCard {
 	@Override
 	public String toString() {
 		return value.name() + " of " + suit.name();
+	}
+
+	/**
+	 * Compare the order to another playing card
+	 */
+	@Override
+	public int compareTo(PlayingCard o) {
+		throw new IllegalStateException("unimplemented!");
+	}
+
+	public int getRank() {
+		return value.getNum() + suit.getRank() * 13;
 	}
 }

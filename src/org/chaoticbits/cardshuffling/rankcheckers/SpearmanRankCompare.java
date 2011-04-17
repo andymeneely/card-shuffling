@@ -31,28 +31,13 @@ public class SpearmanRankCompare implements IRankChecker {
 
 	private double sumRankDifferences(List<PlayingCard> before, List<PlayingCard> after) {
 		double sum = 0.0;
-		Map<PlayingCard, Integer> beforeRank = initBeforeRankMap(before);
-		for (int rank = 0; rank < before.size(); rank++) {
+		for (int rank = 1; rank <= before.size(); rank++) {
 			// rank = the rank of the card in the second deck. 5th card has a rank 5.
 			// beforeRank stuff = look up the beforeRank of the currently ranked card
-			double square = rank - beforeRank.get(after.get(rank));
+			double square = after.get(rank - 1).getRank() - before.get(rank - 1).getRank();
 			square = square * square;
 			sum += square;
 		}
 		return sum;
-	}
-
-	/**
-	 * Treat the before rank as the 1:52
-	 * @param before
-	 * @return
-	 */
-	private Map<PlayingCard, Integer> initBeforeRankMap(List<PlayingCard> before) {
-		Map<PlayingCard, Integer> beforeRank = new HashMap<PlayingCard, Integer>(52);
-		for (int rank = 0; rank < before.size(); rank++) {
-			beforeRank.put(before.get(rank), rank);
-		}
-		return beforeRank;
-
 	}
 }
