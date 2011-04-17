@@ -3,6 +3,7 @@ package org.chaoticbits.cardshuffling.test.rankcheckers;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
@@ -31,7 +32,7 @@ public class DeckDifferenceTest {
 		IRankChecker checker = new DeckDifference();
 		assertEquals(0.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
 	}
-	
+
 	@Test
 	public void swapTwoCards() throws Exception {
 		List<PlayingCard> newDeck1 = newDeck();
@@ -41,6 +42,7 @@ public class DeckDifferenceTest {
 		IRankChecker checker = new DeckDifference();
 		assertEquals(2.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
 	}
+
 	@Test
 	public void swapThreeCards() throws Exception {
 		List<PlayingCard> newDeck1 = newDeck();
@@ -50,5 +52,24 @@ public class DeckDifferenceTest {
 		newDeck2.set(2, newDeck1.get(0));
 		IRankChecker checker = new DeckDifference();
 		assertEquals(3.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
+	}
+
+	@Test
+	public void swapFirstLast() throws Exception {
+		List<PlayingCard> newDeck1 = newDeck();
+		List<PlayingCard> newDeck2 = newDeck();
+		newDeck2.set(0, new PlayingCard(Value.KING, Suit.SPADES));
+		newDeck2.set(51, new PlayingCard(Value.ACE, Suit.CLUBS));
+		IRankChecker checker = new DeckDifference();
+		assertEquals(2.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
+	}
+
+	@Test
+	public void reverseAll() throws Exception {
+		List<PlayingCard> newDeck1 = newDeck();
+		List<PlayingCard> newDeck2 = newDeck();
+		Collections.reverse(newDeck2);
+		IRankChecker checker = new DeckDifference();
+		assertEquals(52.0, checker.compareRanks(newDeck1, newDeck2), 0.00001);
 	}
 }
