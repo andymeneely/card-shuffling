@@ -17,10 +17,12 @@ public class RunAnalysis {
 	public static void main(String[] args) throws FileNotFoundException, DataEntryException {
 		PropertyConfigurator.configure("log4j.properties");
 		log.info("Loading files...");
-		List<ShuffleState> shuffles = new TrialReader().readDeck(new File("data/trial1.txt"));
+		List<ShuffleState> shuffles = new TrialReader().readDeck(new File("data/trial1.1.txt"));
 		shuffles.addAll(new TrialReader().readDeck(new File("data/trial1.2.txt")));
 		shuffles.addAll(new TrialReader().readDeck(new File("data/trial1.3.txt")));
 		shuffles.addAll(new TrialReader().readDeck(new File("data/trial1.4.txt")));
+		shuffles.addAll(new TrialReader().readDeck(new File("data/trial1.5.txt")));
+		shuffles.addAll(new TrialReader().readDeck(new File("data/trial1.6.txt")));
 		log.info("Checking data entry...");
 		for (ShuffleState shuffleState : shuffles) {
 			log.info("\tChecking..." + shuffleState.getDescription());

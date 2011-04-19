@@ -23,8 +23,8 @@ public class EntryCorrection {
 				typeCount.put(playingCard, 1);
 			else typeCount.put(playingCard, count + 1);
 		}
-		if (deck.size() != 52)
-			throw new DataEntryException("Not 52 cards, missing " + getMissing(typeCount));
+		if (deck.size() < 52)
+			throw new DataEntryException("Less than 52 cards, missing " + getMissing(typeCount));
 		boolean wrong = false;
 		for (Map.Entry<PlayingCard, Integer> entry : typeCount.entrySet()) {
 			if (entry.getValue() != 1)
@@ -53,6 +53,8 @@ public class EntryCorrection {
 					missing += card.toString() + ", ";
 			}
 		}
+		if ("".equals(missing))
+			return "NONE";
 		return missing.substring(0, missing.length() - 2);
 	}
 
