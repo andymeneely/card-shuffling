@@ -51,7 +51,7 @@ qc
 4c
 js
 10d
-:Rifle 29
+:Rifle 29 (IMG_0098)
 7d
 kc
 qh
@@ -104,7 +104,7 @@ qc
 kh
 js
 10d
-:Rifle 30
+:Rifle 30 (IMG_0100)
 10h
 7d
 kc
@@ -157,7 +157,7 @@ jh
 kh
 js
 10d
-:Rifle 31
+:Rifle 31 (IMG_0101)
 10h
 qd
 7d
