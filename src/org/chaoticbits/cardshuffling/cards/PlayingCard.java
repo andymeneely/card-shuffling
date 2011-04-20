@@ -1,5 +1,8 @@
 package org.chaoticbits.cardshuffling.cards;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.chaoticbits.cardshuffling.entry.DataEntryException;
 
 public class PlayingCard implements Comparable<PlayingCard> {
@@ -67,4 +70,15 @@ public class PlayingCard implements Comparable<PlayingCard> {
 	public int getRank() {
 		return value.getNum() + suit.getRank() * 13;
 	}
+	
+	public static List<PlayingCard> newDeck() {
+		ArrayList<PlayingCard> newDeck = new ArrayList<PlayingCard>(52);
+		for (Suit suit : Suit.values()) {
+			for (Value value : Value.values()) {
+				newDeck.add(new PlayingCard(value, suit));
+			}
+		}
+		return newDeck;
+	}
+
 }

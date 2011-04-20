@@ -23,6 +23,7 @@ import org.chaoticbits.cardshuffling.rankcheckers.SpearmanRankCompare;
 import org.chaoticbits.cardshuffling.shuffles.EmpiricalShuffle;
 import org.chaoticbits.cardshuffling.shuffles.RandomAlgorithmShuffle;
 import org.chaoticbits.cardshuffling.shuffles.RandomShuffle;
+import org.chaoticbits.cardshuffling.visualize.VisualizeShuffle;
 
 public class RunAnalysis {
 
@@ -41,6 +42,8 @@ public class RunAnalysis {
 		List<EmpiricalShuffle> shuffles = deriveShuffles(states);
 		log.info("Loaded and checked " + states.size() + " deck states");
 		log.info("Derived " + shuffles.size() + " shuffles");
+		log.info("Outputting visualizations...");
+		buildVisuals(shuffles);
 		log.info("Running Random Simulations...");
 		randomSimulations(rnd);
 		log.info("Running Random Empirical Simulations...");
@@ -87,6 +90,10 @@ public class RunAnalysis {
 				shuffles.add(new EmpiricalShuffle(states.get(i).getDeck(), states.get(i + 1).getDeck()));
 		}
 		return shuffles;
+	}
+
+	private static void buildVisuals(List<EmpiricalShuffle> shuffles) throws IOException {
+		new VisualizeShuffle().run(shuffles);
 	}
 
 	private static void randomSimulations(Random random) throws IOException {

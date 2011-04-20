@@ -2,3 +2,5 @@
 *.class
 output/randomEmpiricalRifleShuffle.txt
 output/randomShuffle.txt
+output/visualizeSingleRifles.png
+output/visualizeSuccessiveRifles.png
