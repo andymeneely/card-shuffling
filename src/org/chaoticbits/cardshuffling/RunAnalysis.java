@@ -3,6 +3,7 @@ package org.chaoticbits.cardshuffling;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,13 +20,14 @@ import org.chaoticbits.cardshuffling.rankcheckers.BridgeHandValue;
 import org.chaoticbits.cardshuffling.rankcheckers.DeckDifference;
 import org.chaoticbits.cardshuffling.rankcheckers.SpearmanRankCompare;
 import org.chaoticbits.cardshuffling.shuffles.EmpiricalShuffle;
+import org.chaoticbits.cardshuffling.shuffles.RandomShuffle;
 
 public class RunAnalysis {
 
 	private static final byte[] seed = new byte[] { 89, 12, 123 };
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(RunAnalysis.class);
 
-	public static void main(String[] args) throws FileNotFoundException, DataEntryException {
+	public static void main(String[] args) throws DataEntryException, IOException {
 		PropertyConfigurator.configure("log4j.properties");
 		log.info("Loading trial files...");
 		List<ShuffleState> states = loadTrialFiles();
@@ -81,8 +83,9 @@ public class RunAnalysis {
 		return shuffles;
 	}
 
-	private static void randomSimulations(Random random) {
-		new RandomSimulation(Arrays.asList(new SpearmanRankCompare(), new DeckDifference(),
-				new BridgeHandCompare(), new BridgeHandValue()), 10000).run();;
+	private static void randomSimulations(Random random) throws IOException {
+		new ShuffleSimulation(new RandomShuffle(random), Arrays.asList(new SpearmanRankCompare(),
+				new DeckDifference(), new BridgeHandCompare(), new BridgeHandValue()), 10000, 1, new File(
+				"output/randomShuffle.txt")).run();
 	}
 }

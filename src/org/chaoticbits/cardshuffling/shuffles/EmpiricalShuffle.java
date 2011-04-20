@@ -8,9 +8,11 @@ import org.chaoticbits.cardshuffling.IShuffle;
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
 
 /**
- * This class represents a shuffle we observed that was done by hand. It is derived by giving a before and after deck, and diff'ing
+ * This class represents a shuffle we observed that was done by hand. It is derived by giving a
+ * before and after deck, and diff'ing
+ * 
  * @author apmeneel
- *
+ * 
  */
 public class EmpiricalShuffle implements IShuffle {
 	private final int[] positionReloc;
@@ -22,7 +24,9 @@ public class EmpiricalShuffle implements IShuffle {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.chaoticbits.cardshuffling.IShuffle#shuffle(java.util.List)
 	 */
 	@Override
@@ -33,6 +37,11 @@ public class EmpiricalShuffle implements IShuffle {
 			Collections.swap(newDeck, i, positionReloc[i]);
 		}
 		return newDeck;
+	}
+
+	@Override
+	public String name() {
+		return "INSERT NAME HERE(Empirical)";
 	}
 
 }
