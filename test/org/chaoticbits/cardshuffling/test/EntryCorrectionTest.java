@@ -42,7 +42,7 @@ public class EntryCorrectionTest {
 			new EntryCorrection().checkDeckEntry(goodList);
 			fail("Exception should have been thrown");
 		} catch (DataEntryException e) {
-			assertEquals("Not 52 cards, missing ACE of CLUBS, TWO of CLUBS", e.getMessage());
+			assertEquals("Less than 52 cards, missing ACE of CLUBS, TWO of CLUBS", e.getMessage());
 		}
 	}
 
@@ -68,7 +68,7 @@ public class EntryCorrectionTest {
 			new EntryCorrection().checkDeckEntry(goodList);
 			fail("Exception should have been thrown");
 		} catch (DataEntryException e) {
-			assertEquals("Not 52 cards, missing FIVE of HEARTS, SEVEN of HEARTS", e.getMessage());
+			assertEquals("Less than 52 cards, missing FIVE of HEARTS, SEVEN of HEARTS", e.getMessage());
 		}
 	}
 }
