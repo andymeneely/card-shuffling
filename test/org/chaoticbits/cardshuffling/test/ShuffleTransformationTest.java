@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.chaoticbits.cardshuffling.ShuffleTransformation;
+import org.chaoticbits.cardshuffling.IShuffle;
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
 import org.chaoticbits.cardshuffling.cards.Suit;
 import org.chaoticbits.cardshuffling.cards.Value;
+import org.chaoticbits.cardshuffling.shuffles.EmpiricalShuffle;
 import org.junit.Test;
 
 public class ShuffleTransformationTest {
@@ -28,7 +29,7 @@ public class ShuffleTransformationTest {
 	public void doesNothing() throws Exception {
 		List<PlayingCard> deck1 = newDeck();
 		List<PlayingCard> deck2 = newDeck();
-		ShuffleTransformation trans = new ShuffleTransformation(deck1, deck2);
+		IShuffle trans = new EmpiricalShuffle(deck1, deck2);
 		List<PlayingCard> expDeckInput = newDeck();
 		List<PlayingCard> expDeckOutput = newDeck();
 		Collections.reverse(expDeckInput);
@@ -44,7 +45,7 @@ public class ShuffleTransformationTest {
 		Collections.swap(deck2, 1, 50);
 		Collections.swap(deck2, 2, 49);
 		Collections.swap(deck2, 3, 48);
-		ShuffleTransformation trans = new ShuffleTransformation(deck1, deck2);
+		IShuffle trans = new EmpiricalShuffle(deck1, deck2);
 		List<PlayingCard> expDeckInput = newDeck();
 		List<PlayingCard> expDeckOutput = newDeck();
 		Collections.reverse(expDeckInput);

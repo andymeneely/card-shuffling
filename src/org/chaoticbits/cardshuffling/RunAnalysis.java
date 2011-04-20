@@ -3,17 +3,26 @@ package org.chaoticbits.cardshuffling;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.chaoticbits.cardshuffling.entry.DataEntryException;
 import org.chaoticbits.cardshuffling.entry.EntryCorrection;
 import org.chaoticbits.cardshuffling.entry.ShuffleState;
 import org.chaoticbits.cardshuffling.entry.TrialReader;
+import org.chaoticbits.cardshuffling.rankcheckers.BridgeHandCompare;
+import org.chaoticbits.cardshuffling.rankcheckers.BridgeHandValue;
+import org.chaoticbits.cardshuffling.rankcheckers.DeckDifference;
+import org.chaoticbits.cardshuffling.rankcheckers.SpearmanRankCompare;
+import org.chaoticbits.cardshuffling.shuffles.EmpiricalShuffle;
 
 public class RunAnalysis {
 
+	private static final byte[] seed = new byte[] { 89, 12, 123 };
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(RunAnalysis.class);
 
 	public static void main(String[] args) throws FileNotFoundException, DataEntryException {
@@ -23,8 +32,9 @@ public class RunAnalysis {
 		log.info("Checking data entry...");
 		checkShuffleStates(states);
 		log.info("Deriving shuffle transformations...");
-		List<ShuffleTransformation> shuffles = deriveShuffles(states);
-
+		List<EmpiricalShuffle> shuffles = deriveShuffles(states);
+		log.info("Running Random Simulations...");
+		randomSimulations(new SecureRandom(seed));
 		log.info("Loaded and checked " + states.size() + " deck states");
 		log.info("Derived " + shuffles.size() + " shuffles");
 		log.info("Done.");
@@ -61,13 +71,18 @@ public class RunAnalysis {
 		}
 	}
 
-	private static List<ShuffleTransformation> deriveShuffles(List<ShuffleState> states) {
-		List<ShuffleTransformation> shuffles = new ArrayList<ShuffleTransformation>();
+	private static List<EmpiricalShuffle> deriveShuffles(List<ShuffleState> states) {
+		List<EmpiricalShuffle> shuffles = new ArrayList<EmpiricalShuffle>();
 		for (int i = 0; i < states.size() - 1; i++) {
 			// if consecutive shuffle state
 			if (states.get(i).getSequenceNumber() < states.get(i + 1).getSequenceNumber())
-				shuffles.add(new ShuffleTransformation(states.get(i).getDeck(), states.get(i + 1).getDeck()));
+				shuffles.add(new EmpiricalShuffle(states.get(i).getDeck(), states.get(i + 1).getDeck()));
 		}
 		return shuffles;
+	}
+
+	private static void randomSimulations(Random random) {
+		new RandomSimulation(Arrays.asList(new SpearmanRankCompare(), new DeckDifference(),
+				new BridgeHandCompare(), new BridgeHandValue()), 10000).run();;
 	}
 }
