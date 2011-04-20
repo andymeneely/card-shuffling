@@ -103,7 +103,7 @@ public class BridgeHandValue implements IRankChecker {
 
 	@Override
 	public String name() {
-		return "Bridge hand difference";
+		return "Bridge hand value difference";
 	}
 
 }
