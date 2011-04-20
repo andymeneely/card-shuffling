@@ -1,2 +1,4 @@
 
 *.class
+output/randomEmpiricalRifleShuffle.txt
+output/randomShuffle.txt
