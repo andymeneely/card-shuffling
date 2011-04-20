@@ -17,12 +17,12 @@ import org.chaoticbits.cardshuffling.cards.PlayingCard;
  */
 public class RandomAlgorithmShuffle implements IShuffle {
 
-	private List<IShuffle> pool;
+	private List<? extends IShuffle> pool;
 	private List<IShuffle> donePool;
 	private String name = "(empty pool)";
 	private final Random rnd;
 
-	public RandomAlgorithmShuffle(List<IShuffle> pool, Random rnd) {
+	public RandomAlgorithmShuffle(List<? extends IShuffle> pool, Random rnd) {
 		this.pool = pool;
 		this.rnd = rnd;
 		if (pool.size() > 0)
@@ -34,9 +34,9 @@ public class RandomAlgorithmShuffle implements IShuffle {
 	public List<PlayingCard> shuffle(List<PlayingCard> deck) {
 		if (pool.isEmpty())
 			pool = donePool;
-		IShuffle shuffle = pool.remove(rnd.nextInt(pool.size()));
-		donePool.add(shuffle);
-		return shuffle(deck);
+		IShuffle nextShuffle = pool.remove(rnd.nextInt(pool.size()));
+		donePool.add(nextShuffle);
+		return nextShuffle.shuffle(deck);
 	}
 
 	@Override

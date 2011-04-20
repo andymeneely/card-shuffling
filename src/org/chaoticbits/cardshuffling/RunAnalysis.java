@@ -18,14 +18,18 @@ import org.chaoticbits.cardshuffling.entry.TrialReader;
 import org.chaoticbits.cardshuffling.rankcheckers.BridgeHandCompare;
 import org.chaoticbits.cardshuffling.rankcheckers.BridgeHandValue;
 import org.chaoticbits.cardshuffling.rankcheckers.DeckDifference;
+import org.chaoticbits.cardshuffling.rankcheckers.IRankChecker;
 import org.chaoticbits.cardshuffling.rankcheckers.SpearmanRankCompare;
 import org.chaoticbits.cardshuffling.shuffles.EmpiricalShuffle;
+import org.chaoticbits.cardshuffling.shuffles.RandomAlgorithmShuffle;
 import org.chaoticbits.cardshuffling.shuffles.RandomShuffle;
 
 public class RunAnalysis {
 
-	private static final Random rnd= new SecureRandom(new byte[] { 89, 12, 123 });
+	private static final Random rnd = new SecureRandom(new byte[] { 89, 12, 123 });
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(RunAnalysis.class);
+	private static final List<IRankChecker> RANK_CHECKERS = Arrays.asList(new SpearmanRankCompare(),
+			new DeckDifference(), new BridgeHandCompare(), new BridgeHandValue());
 
 	public static void main(String[] args) throws DataEntryException, IOException {
 		PropertyConfigurator.configure("log4j.properties");
@@ -35,12 +39,12 @@ public class RunAnalysis {
 		checkShuffleStates(states);
 		log.info("Deriving shuffle transformations...");
 		List<EmpiricalShuffle> shuffles = deriveShuffles(states);
+		log.info("Loaded and checked " + states.size() + " deck states");
+		log.info("Derived " + shuffles.size() + " shuffles");
 		log.info("Running Random Simulations...");
 		randomSimulations(rnd);
 		log.info("Running Random Empirical Simulations...");
-		randomEmpiricalSimulations(rnd);
-		log.info("Loaded and checked " + states.size() + " deck states");
-		log.info("Derived " + shuffles.size() + " shuffles");
+		randomEmpiricalSimulations(shuffles, rnd);
 		log.info("Done.");
 	}
 
@@ -86,14 +90,14 @@ public class RunAnalysis {
 	}
 
 	private static void randomSimulations(Random random) throws IOException {
-		new ShuffleSimulation(new RandomShuffle(random), Arrays.asList(new SpearmanRankCompare(),
-				new DeckDifference(), new BridgeHandCompare(), new BridgeHandValue()), 1000, 10, new File(
+		new ShuffleSimulation(new RandomShuffle(random), RANK_CHECKERS, 1000, 10, new File(
 				"output/randomShuffle.txt")).run();
 	}
 
-	private static void randomEmpiricalSimulations(Random random) throws IOException {
-		new ShuffleSimulation(new RandomShuffle(random), Arrays.asList(new SpearmanRankCompare(),
-				new DeckDifference(), new BridgeHandCompare(), new BridgeHandValue()), 1000, 10, new File(
+	private static void randomEmpiricalSimulations(List<EmpiricalShuffle> pool, Random random)
+			throws IOException {
+		RandomAlgorithmShuffle randomAlgorithmShuffle = new RandomAlgorithmShuffle(pool, random);
+		new ShuffleSimulation(randomAlgorithmShuffle, RANK_CHECKERS, 1000, 10, new File(
 				"output/randomEmpiricalRifleShuffle.txt")).run();
 	}
 }

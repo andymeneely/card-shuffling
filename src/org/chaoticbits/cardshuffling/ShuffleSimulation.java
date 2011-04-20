@@ -38,7 +38,7 @@ public class ShuffleSimulation {
 			for (int subTrial = 0; subTrial < maxSubtrials; subTrial++) {
 				List<PlayingCard> beforeDeck = newRandomDeck();
 				List<PlayingCard> afterDeck = new ArrayList<PlayingCard>(beforeDeck);
-				shuffle.shuffle(afterDeck);
+				afterDeck = shuffle.shuffle(afterDeck);
 				for (IRankChecker checker : rankCheckers) {
 					Double rankCheckerValue = checker.compareRanks(beforeDeck, afterDeck);
 					output.write(shuffle.name() + "\t" + trial + "\t" + subTrial + "\t" + checker.name()
