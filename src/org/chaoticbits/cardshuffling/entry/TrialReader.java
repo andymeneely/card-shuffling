@@ -14,7 +14,7 @@ public class TrialReader {
 		List<ShuffleState> shuffles = new ArrayList<ShuffleState>();
 		Scanner scanner = new Scanner(file);
 		ShuffleState current = null;
-		int sequenceNumber = 1;
+		int sequenceNumber = 0;
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			if (!line.startsWith("#") && line.trim().length() > 0) {// ignore comments and blank lines

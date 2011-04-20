@@ -26,4 +26,9 @@ public class ShuffleState {
 	public int getSequenceNumber() {
 		return sequenceNumber;
 	}
+
+	@Override
+	public String toString() {
+		return getDescription() + " (#" + getSequenceNumber() + ")";
+	}
 }
