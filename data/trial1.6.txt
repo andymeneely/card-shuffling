@@ -210,7 +210,7 @@ qs
 kh
 js
 10d
-:Rifle 32
+:Rifle 32 (IMG_0102)
 6s
 10h
 5s
@@ -263,7 +263,7 @@ kh
 js
 ac
 10d
-:Rifle 33
+:Rifle 33 (IMG_0104)
 6s
 10h
 3c
@@ -316,7 +316,7 @@ js
 ad
 ac
 10d
-:Rifle 34
+:Rifle 34 (IMG_0106)
 6s
 ah
 10h
@@ -369,7 +369,7 @@ qs
 6h
 9d
 as
-:Rifle 35
+:Rifle 35 (IMG_0107)
 6s
 ah
 jd
@@ -422,7 +422,7 @@ kc
 ks
 9d
 as
-:Rifle 36
+:Rifle 36 (IMG_0108)
 6s
 2h
 ah
@@ -475,7 +475,7 @@ kh
 5d
 6d
 qd
-:Rifles 37
+:Rifles 37 (IMG_0110)
 9h
 6s
 jc
@@ -528,7 +528,7 @@ kh
 ac
 5s
 qd
-:Rifle 38
+:Rifle 38 (IMG_0111)
 qc
 10s
 qh
@@ -581,7 +581,7 @@ kd
 8c
 kc
 qd
-:Rifle 39
+:Rifle 39 (IMG_0112)
 qc
 10s
 7d
@@ -634,7 +634,7 @@ jh
 5c
 kc
 qd
-:Rifle 40
+:Rifle 40 (IMG_113)
 qc
 10s
 7d
@@ -687,7 +687,7 @@ js
 2h
 kc
 qd
-:Rifle 41
+:Rifle 41 (IMG_0114)
 qc
 6d
 10s
