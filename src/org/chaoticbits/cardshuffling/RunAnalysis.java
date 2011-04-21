@@ -44,10 +44,10 @@ public class RunAnalysis {
 		log.info("Derived " + shuffles.size() + " shuffles");
 		log.info("Outputting visualizations...");
 		buildVisuals(shuffles);
-		log.info("Running Random Simulations...");
-		randomSimulations(rnd);
-		log.info("Running Random Empirical Simulations...");
-		randomEmpiricalSimulations(shuffles, rnd);
+		// log.info("Running Random Simulations...");
+		// randomSimulations(rnd);
+		// log.info("Running Random Empirical Simulations...");
+		// randomEmpiricalSimulations(shuffles, rnd);
 		log.info("Done.");
 	}
 
