@@ -7,8 +7,12 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Set;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.chaoticbits.cardshuffling.entry.DataEntryException;
@@ -23,6 +27,7 @@ import org.chaoticbits.cardshuffling.rankcheckers.SpearmanRankCompare;
 import org.chaoticbits.cardshuffling.shuffles.EmpiricalShuffle;
 import org.chaoticbits.cardshuffling.shuffles.RandomAlgorithmShuffle;
 import org.chaoticbits.cardshuffling.shuffles.RandomShuffle;
+import org.chaoticbits.cardshuffling.shuffles.ShuffleType;
 import org.chaoticbits.cardshuffling.visualize.VisualizeShuffle;
 
 public class RunAnalysis {
@@ -40,8 +45,7 @@ public class RunAnalysis {
 		checkShuffleStates(states);
 		log.info("Deriving shuffle transformations...");
 		List<EmpiricalShuffle> shuffles = deriveShuffles(states);
-		log.info("Loaded and checked " + states.size() + " deck states");
-		log.info("Derived " + shuffles.size() + " shuffles");
+		outputMetastats(states, shuffles);
 		log.info("Outputting visualizations...");
 		buildVisuals(shuffles);
 		// log.info("Running Random Simulations...");
@@ -49,6 +53,22 @@ public class RunAnalysis {
 		// log.info("Running Random Empirical Simulations...");
 		// randomEmpiricalSimulations(shuffles, rnd);
 		log.info("Done.");
+	}
+
+	private static void outputMetastats(List<ShuffleState> states, List<EmpiricalShuffle> shuffles) {
+		log.info("Loaded and checked " + states.size() + " deck states");
+		String derived = "Derived " + shuffles.size() + " shuffles; ";
+		Map<ShuffleType, Integer> count = new HashMap<ShuffleType, Integer>();
+		for (EmpiricalShuffle empiricalShuffle : shuffles) {
+			Integer thisCount = count.get(empiricalShuffle.type());
+			if (thisCount == null)
+				thisCount = 0;
+			count.put(empiricalShuffle.type(), thisCount + 1);
+		}
+		Set<Entry<ShuffleType, Integer>> entrySet = count.entrySet();
+		for (Entry<ShuffleType, Integer> entry : entrySet)
+			derived += entry.getValue() + " " + entry.getKey() + ",";
+		log.info(derived);
 	}
 
 	private static List<ShuffleState> loadTrialFiles() throws FileNotFoundException, DataEntryException {
@@ -85,13 +105,21 @@ public class RunAnalysis {
 	private static List<EmpiricalShuffle> deriveShuffles(List<ShuffleState> states) {
 		List<EmpiricalShuffle> shuffles = new ArrayList<EmpiricalShuffle>();
 		for (int i = 0; i < states.size() - 1; i++) {
-			// if consecutive shuffle state
-			if (states.get(i).getSequenceNumber() < states.get(i + 1).getSequenceNumber()){
-				String shuffleName = states.get(i+1).getDescription();
-				shuffles.add(new EmpiricalShuffle(shuffleName,states.get(i).getDeck(), states.get(i + 1).getDeck()));
+			if (inSequence(states, i) && sameShuffleType(states, i)) {
+				String shuffleName = states.get(i + 1).getDescription();
+				shuffles.add(new EmpiricalShuffle(shuffleName, states.get(i).getDeck(), states.get(i + 1).getDeck()));
 			}
 		}
 		return shuffles;
+	}
+
+	private static boolean sameShuffleType(List<ShuffleState> states, int i) {
+		return ShuffleType.fromString(states.get(i).getDescription()) == ShuffleType.fromString(states.get(i + 1)
+				.getDescription());
+	}
+
+	private static boolean inSequence(List<ShuffleState> states, int i) {
+		return states.get(i).getSequenceNumber() < states.get(i + 1).getSequenceNumber();
 	}
 
 	private static void buildVisuals(List<EmpiricalShuffle> shuffles) throws IOException {

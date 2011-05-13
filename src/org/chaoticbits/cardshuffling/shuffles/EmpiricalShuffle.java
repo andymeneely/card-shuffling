@@ -17,11 +17,11 @@ import org.chaoticbits.cardshuffling.cards.PlayingCard;
 public class EmpiricalShuffle implements IShuffle {
 	private final int[] positionReloc;
 	private final String shuffleName;
-	private String type;
+	private ShuffleType type;
 
 	public EmpiricalShuffle(String shuffleName, List<PlayingCard> before, List<PlayingCard> after) {
 		this.shuffleName = shuffleName;
-		this.type = shuffleName.replaceAll("[0123456789]", "").trim();
+		this.type = ShuffleType.fromString(shuffleName);
 		positionReloc = new int[before.size()];
 		for (int i = 0; i < before.size(); i++) {
 			positionReloc[i] = after.indexOf(before.get(i));
@@ -49,7 +49,7 @@ public class EmpiricalShuffle implements IShuffle {
 	}
 	
 	@Override
-	public String type() {
+	public ShuffleType type() {
 		return type;
 	}
 

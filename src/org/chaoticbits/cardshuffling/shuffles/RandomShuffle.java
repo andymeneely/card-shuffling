@@ -27,8 +27,8 @@ public class RandomShuffle implements IShuffle {
 	}
 	
 	@Override
-	public String type() {
-		return "Random";
+	public ShuffleType type() {
+		return ShuffleType.RANDOM;
 	}
 
 }
