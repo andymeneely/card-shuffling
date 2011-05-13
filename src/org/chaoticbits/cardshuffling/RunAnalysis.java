@@ -86,8 +86,10 @@ public class RunAnalysis {
 		List<EmpiricalShuffle> shuffles = new ArrayList<EmpiricalShuffle>();
 		for (int i = 0; i < states.size() - 1; i++) {
 			// if consecutive shuffle state
-			if (states.get(i).getSequenceNumber() < states.get(i + 1).getSequenceNumber())
-				shuffles.add(new EmpiricalShuffle(states.get(i).getDeck(), states.get(i + 1).getDeck()));
+			if (states.get(i).getSequenceNumber() < states.get(i + 1).getSequenceNumber()){
+				String shuffleName = states.get(i+1).getDescription();
+				shuffles.add(new EmpiricalShuffle(shuffleName,states.get(i).getDeck(), states.get(i + 1).getDeck()));
+			}
 		}
 		return shuffles;
 	}
@@ -97,12 +99,11 @@ public class RunAnalysis {
 	}
 
 	private static void randomSimulations(Random random) throws IOException {
-		new ShuffleSimulation(new RandomShuffle(random), RANK_CHECKERS, 1000, 10, new File(
-				"output/randomShuffle.txt")).run();
+		new ShuffleSimulation(new RandomShuffle(random), RANK_CHECKERS, 1000, 10, new File("output/randomShuffle.txt"))
+				.run();
 	}
 
-	private static void randomEmpiricalSimulations(List<EmpiricalShuffle> pool, Random random)
-			throws IOException {
+	private static void randomEmpiricalSimulations(List<EmpiricalShuffle> pool, Random random) throws IOException {
 		RandomAlgorithmShuffle randomAlgorithmShuffle = new RandomAlgorithmShuffle(pool, random);
 		new ShuffleSimulation(randomAlgorithmShuffle, RANK_CHECKERS, 1000, 10, new File(
 				"output/randomEmpiricalRifleShuffle.txt")).run();

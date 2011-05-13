@@ -1,6 +1,7 @@
 package org.chaoticbits.cardshuffling.test;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +30,7 @@ public class ShuffleTransformationTest {
 	public void doesNothing() throws Exception {
 		List<PlayingCard> deck1 = newDeck();
 		List<PlayingCard> deck2 = newDeck();
-		IShuffle trans = new EmpiricalShuffle(deck1, deck2);
+		IShuffle trans = new EmpiricalShuffle("", deck1, deck2);
 		List<PlayingCard> expDeckInput = newDeck();
 		List<PlayingCard> expDeckOutput = newDeck();
 		Collections.reverse(expDeckInput);
@@ -45,7 +46,7 @@ public class ShuffleTransformationTest {
 		Collections.swap(deck2, 1, 50);
 		Collections.swap(deck2, 2, 49);
 		Collections.swap(deck2, 3, 48);
-		IShuffle trans = new EmpiricalShuffle(deck1, deck2);
+		IShuffle trans = new EmpiricalShuffle("", deck1, deck2);
 		List<PlayingCard> expDeckInput = newDeck();
 		List<PlayingCard> expDeckOutput = newDeck();
 		Collections.reverse(expDeckInput);
@@ -55,6 +56,11 @@ public class ShuffleTransformationTest {
 		Collections.swap(expDeckOutput, 2, 49);
 		Collections.swap(expDeckOutput, 3, 48);
 		assertArrayEquals(expDeckOutput.toArray(), trans.shuffle(expDeckInput).toArray());
+	}
+	
+	@Test
+	public void extractType() throws Exception {
+		assertEquals("Rifle", "  \t Rifle 59".replaceAll("[0123456789]", "").trim());
 	}
 
 }

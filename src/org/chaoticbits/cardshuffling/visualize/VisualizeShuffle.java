@@ -24,7 +24,7 @@ public class VisualizeShuffle {
 	private void visualizeShuffles(List<EmpiricalShuffle> shuffles, boolean singles) throws IOException {
 		// add reference deck
 		if (singles)
-			shuffles.add(0, new EmpiricalShuffle(PlayingCard.newDeck(), PlayingCard.newDeck()));
+			shuffles.add(0, new EmpiricalShuffle("Ordered", PlayingCard.newDeck(), PlayingCard.newDeck()));
 		Map<PlayingCard, Color> card2Color = initPlayingCardMap();
 		BufferedImage bi = new BufferedImage(600, 900, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = bi.createGraphics();
@@ -40,8 +40,7 @@ public class VisualizeShuffle {
 				g2d.fillRect(50 + cardSlot * cardWidth, 50 + deckSlot * cardHeight, cardWidth, cardHeight);
 			}
 		}
-		ImageIO.write(bi, "PNG", new File("output/visualize" + (singles ? "Single" : "Successive")
-				+ "Rifles.png"));
+		ImageIO.write(bi, "PNG", new File("output/visualize" + (singles ? "Single" : "Successive") + "Rifles.png"));
 	}
 
 	private Map<PlayingCard, Color> initPlayingCardMap() {
