@@ -25,5 +25,10 @@ public class RandomShuffle implements IShuffle {
 	public String name() {
 		return "Random";
 	}
+	
+	@Override
+	public String type() {
+		return "Random";
+	}
 
 }

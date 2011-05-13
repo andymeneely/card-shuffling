@@ -43,5 +43,10 @@ public class EmpiricalShuffle implements IShuffle {
 	public String name() {
 		return "INSERT NAME HERE(Empirical)";
 	}
+	
+	@Override
+	public String type() {
+		return "INSERT TYPE HERE(Empirical)";
+	}
 
 }

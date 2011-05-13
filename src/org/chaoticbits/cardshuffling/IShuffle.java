@@ -9,4 +9,6 @@ public interface IShuffle {
 	public abstract List<PlayingCard> shuffle(List<PlayingCard> deck);
 
 	public String name();
+	
+	public String type();
 }

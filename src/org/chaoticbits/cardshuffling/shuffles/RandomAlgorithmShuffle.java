@@ -44,4 +44,9 @@ public class RandomAlgorithmShuffle implements IShuffle {
 		return "Random algorithm of " + name;
 	}
 
+	@Override
+	public String type() {
+		return name();
+	}
+
 }
