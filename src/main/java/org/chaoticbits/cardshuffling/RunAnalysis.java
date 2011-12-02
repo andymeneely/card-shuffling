@@ -50,8 +50,8 @@ public class RunAnalysis {
 		buildVisuals(shuffles);
 		// log.info("Running Random Simulations...");
 		// randomSimulations(rnd);
-		// log.info("Running Random Empirical Simulations...");
-		// randomEmpiricalSimulations(shuffles, rnd);
+		log.info("Running Random Empirical Simulations...");
+		randomEmpiricalSimulations(shuffles, rnd);
 		log.info("Done.");
 	}
 
@@ -128,8 +128,8 @@ public class RunAnalysis {
 		new ShuffleSimulation(new RandomShuffle(random), RANK_CHECKERS, 1000, 10, new File("output/randomShuffle.txt")).run();
 	}
 
-	private static void randomEmpiricalSimulations(List<EmpiricalShuffle> pool, Random random) throws IOException {
-		RandomAlgorithmShuffle randomAlgorithmShuffle = new RandomAlgorithmShuffle(pool, random);
+	private static void randomEmpiricalSimulations(List<IShuffle> shuffles, Random random) throws IOException {
+		RandomAlgorithmShuffle randomAlgorithmShuffle = new RandomAlgorithmShuffle(shuffles, random);
 		new ShuffleSimulation(randomAlgorithmShuffle, RANK_CHECKERS, 1000, 10, new File("output/randomEmpiricalRifleShuffle.txt")).run();
 	}
 }
