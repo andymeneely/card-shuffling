@@ -11,20 +11,27 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import org.chaoticbits.cardshuffling.IShuffle;
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
 import org.chaoticbits.cardshuffling.shuffles.EmpiricalShuffle;
 
+/**
+ * Given a set of shuffles, make a color visualization showing how one card moves to the next
+ * @author andy
+ * 
+ */
 public class VisualizeShuffle {
 
-	public void run(List<EmpiricalShuffle> shuffles) throws IOException {
+	public void run(List<IShuffle> shuffles) throws IOException {
 		visualizeShuffles(shuffles, true);
 		visualizeShuffles(shuffles, false);
 	}
 
-	private void visualizeShuffles(List<EmpiricalShuffle> shuffles, boolean singles) throws IOException {
+	private void visualizeShuffles(List<IShuffle> shuffles, boolean singles) throws IOException {
 		// add reference deck
-		if (singles)
+		if (singles) {
 			shuffles.add(0, new EmpiricalShuffle("Ordered", PlayingCard.newDeck(), PlayingCard.newDeck()));
+		}
 		Map<PlayingCard, Color> card2Color = initPlayingCardMap();
 		BufferedImage bi = new BufferedImage(600, 900, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = bi.createGraphics();
@@ -35,12 +42,17 @@ public class VisualizeShuffle {
 			if (singles)
 				newDeck = PlayingCard.newDeck();
 			newDeck = shuffles.get(deckSlot).shuffle(newDeck);
-			for (int cardSlot = 0; cardSlot < newDeck.size(); cardSlot++) {
-				g2d.setColor(card2Color.get(newDeck.get(cardSlot)));
-				g2d.fillRect(50 + cardSlot * cardWidth, 50 + deckSlot * cardHeight, cardWidth, cardHeight);
-			}
+			outputDeckLine(card2Color, g2d, cardWidth, cardHeight, newDeck, deckSlot);
 		}
 		ImageIO.write(bi, "PNG", new File("output/visualize" + (singles ? "Single" : "Successive") + "Rifles.png"));
+	}
+
+	private void outputDeckLine(Map<PlayingCard, Color> card2Color, Graphics2D g2d, int cardWidth, int cardHeight, List<PlayingCard> newDeck,
+			int deckSlot) {
+		for (int cardSlot = 0; cardSlot < newDeck.size(); cardSlot++) {
+			g2d.setColor(card2Color.get(newDeck.get(cardSlot)));
+			g2d.fillRect(50 + cardSlot * cardWidth, 50 + deckSlot * cardHeight, cardWidth, cardHeight);
+		}
 	}
 
 	private Map<PlayingCard, Color> initPlayingCardMap() {

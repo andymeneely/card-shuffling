@@ -15,11 +15,18 @@ public class RandomShuffle implements IShuffle {
 		this.random = random;
 	}
 
+	/**
+	 * Given an ordered deck of cards, return a new list of those same cards, but in a uniformly-distributed
+	 * shuffled order according to {@link Collections#shuffle(List)}
+	 */
 	public List<PlayingCard> shuffle(List<PlayingCard> deck) {
 		Collections.shuffle(deck, random);
 		return deck;
 	}
 
+	/**
+	 * Always returns "Random"
+	 */
 	public String name() {
 		return "Random";
 	}

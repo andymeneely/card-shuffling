@@ -6,10 +6,11 @@ import java.util.List;
 
 import org.chaoticbits.cardshuffling.IShuffle;
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
+import org.chaoticbits.cardshuffling.entry.ShuffleState;
 
 /**
- * This class represents a shuffle we observed that was done by hand. It is derived by giving a
- * before and after deck, and diff'ing
+ * This class represents a shuffle we observed that was done by hand. It is derived by giving a before and
+ * after {@link ShuffleState}, and diff'ing them. A real shuffle.
  * 
  * @author apmeneel
  * 
@@ -28,10 +29,9 @@ public class EmpiricalShuffle implements IShuffle {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.chaoticbits.cardshuffling.IShuffle#shuffle(java.util.List)
+	/**
+	 * Given an ordered deck of cards, return a new list of those same cards, but in the observed shuffled order.
+	 * @return List<PlayingCard>
 	 */
 	public List<PlayingCard> shuffle(List<PlayingCard> deck) {
 		List<PlayingCard> newDeck = new ArrayList<PlayingCard>(deck.size());

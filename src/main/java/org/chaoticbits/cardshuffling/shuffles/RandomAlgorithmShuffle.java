@@ -1,6 +1,7 @@
 package org.chaoticbits.cardshuffling.shuffles;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -8,9 +9,9 @@ import org.chaoticbits.cardshuffling.IShuffle;
 import org.chaoticbits.cardshuffling.cards.PlayingCard;
 
 /**
- * Given a pool of IShuffles, this method will randomly choose one shuffle out of that list and
- * execute it. That one IShuffle gets set aside and the pool shrinks until it's gone - then resets.
- * This guarantees that all shuffle algorithms are executed evenly, but in random order.
+ * Given a pool of IShuffles, this method will randomly choose one shuffle out of that list and execute it.
+ * That one IShuffle gets set aside and the pool shrinks until it's gone - then resets. This guarantees that
+ * all shuffle algorithms are executed evenly, but in random order.
  * 
  * @author apmeneel
  * 
@@ -30,6 +31,11 @@ public class RandomAlgorithmShuffle implements IShuffle {
 		donePool = new ArrayList<IShuffle>(pool.size());
 	}
 
+	/**
+	 * Given an ordered deck of cards, return a new list of those same cards, but using a randomly-chosen
+	 * algorithm.
+	 * @return List<PlayingCard>
+	 */
 	public List<PlayingCard> shuffle(List<PlayingCard> deck) {
 		if (pool.isEmpty())
 			pool = donePool;
@@ -38,6 +44,9 @@ public class RandomAlgorithmShuffle implements IShuffle {
 		return nextShuffle.shuffle(deck);
 	}
 
+	/**
+	 * Returns "Random Algorithm of ..." then the name of the algorithm.
+	 */
 	public String name() {
 		return "Random algorithm of " + name;
 	}

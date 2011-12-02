@@ -34,8 +34,8 @@ public class RunAnalysis {
 
 	private static final Random rnd = new SecureRandom(new byte[] { 89, 12, 123 });
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(RunAnalysis.class);
-	private static final List<IRankChecker> RANK_CHECKERS = Arrays.asList(new SpearmanRankCompare(),
-			new DeckDifference(), new BridgeHandCompare(), new BridgeHandValue());
+	private static final List<IRankChecker> RANK_CHECKERS = Arrays.asList(new SpearmanRankCompare(), new DeckDifference(),
+			new BridgeHandCompare(), new BridgeHandValue());
 
 	public static void main(String[] args) throws DataEntryException, IOException {
 		PropertyConfigurator.configure("log4j.properties");
@@ -44,7 +44,7 @@ public class RunAnalysis {
 		log.info("Checking data entry...");
 		checkShuffleStates(states);
 		log.info("Deriving shuffle transformations...");
-		List<EmpiricalShuffle> shuffles = deriveShuffles(states);
+		List<IShuffle> shuffles = deriveShuffles(states);
 		outputMetastats(states, shuffles);
 		log.info("Outputting visualizations...");
 		buildVisuals(shuffles);
@@ -55,15 +55,15 @@ public class RunAnalysis {
 		log.info("Done.");
 	}
 
-	private static void outputMetastats(List<ShuffleState> states, List<EmpiricalShuffle> shuffles) {
+	private static void outputMetastats(List<ShuffleState> states, List<IShuffle> shuffles) {
 		log.info("Loaded and checked " + states.size() + " deck states");
 		String derived = "Derived " + shuffles.size() + " shuffles; ";
 		Map<ShuffleType, Integer> count = new HashMap<ShuffleType, Integer>();
-		for (EmpiricalShuffle empiricalShuffle : shuffles) {
-			Integer thisCount = count.get(empiricalShuffle.type());
+		for (IShuffle shuffle : shuffles) {
+			Integer thisCount = count.get(shuffle.type());
 			if (thisCount == null)
 				thisCount = 0;
-			count.put(empiricalShuffle.type(), thisCount + 1);
+			count.put(shuffle.type(), thisCount + 1);
 		}
 		Set<Entry<ShuffleType, Integer>> entrySet = count.entrySet();
 		for (Entry<ShuffleType, Integer> entry : entrySet)
@@ -101,8 +101,8 @@ public class RunAnalysis {
 		}
 	}
 
-	private static List<EmpiricalShuffle> deriveShuffles(List<ShuffleState> states) {
-		List<EmpiricalShuffle> shuffles = new ArrayList<EmpiricalShuffle>();
+	private static List<IShuffle> deriveShuffles(List<ShuffleState> states) {
+		List<IShuffle> shuffles = new ArrayList<IShuffle>();
 		for (int i = 0; i < states.size() - 1; i++) {
 			if (inSequence(states, i) && sameShuffleType(states, i)) {
 				String shuffleName = states.get(i + 1).getDescription();
@@ -113,26 +113,23 @@ public class RunAnalysis {
 	}
 
 	private static boolean sameShuffleType(List<ShuffleState> states, int i) {
-		return ShuffleType.fromString(states.get(i).getDescription()) == ShuffleType.fromString(states.get(i + 1)
-				.getDescription());
+		return ShuffleType.fromString(states.get(i).getDescription()) == ShuffleType.fromString(states.get(i + 1).getDescription());
 	}
 
 	private static boolean inSequence(List<ShuffleState> states, int i) {
 		return states.get(i).getSequenceNumber() < states.get(i + 1).getSequenceNumber();
 	}
 
-	private static void buildVisuals(List<EmpiricalShuffle> shuffles) throws IOException {
+	private static <T> void buildVisuals(List<IShuffle> shuffles) throws IOException {
 		new VisualizeShuffle().run(shuffles);
 	}
 
 	private static void randomSimulations(Random random) throws IOException {
-		new ShuffleSimulation(new RandomShuffle(random), RANK_CHECKERS, 1000, 10, new File("output/randomShuffle.txt"))
-				.run();
+		new ShuffleSimulation(new RandomShuffle(random), RANK_CHECKERS, 1000, 10, new File("output/randomShuffle.txt")).run();
 	}
 
 	private static void randomEmpiricalSimulations(List<EmpiricalShuffle> pool, Random random) throws IOException {
 		RandomAlgorithmShuffle randomAlgorithmShuffle = new RandomAlgorithmShuffle(pool, random);
-		new ShuffleSimulation(randomAlgorithmShuffle, RANK_CHECKERS, 1000, 10, new File(
-				"output/randomEmpiricalRifleShuffle.txt")).run();
+		new ShuffleSimulation(randomAlgorithmShuffle, RANK_CHECKERS, 1000, 10, new File("output/randomEmpiricalRifleShuffle.txt")).run();
 	}
 }
