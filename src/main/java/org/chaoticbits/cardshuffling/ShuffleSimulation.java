@@ -20,26 +20,26 @@ import org.chaoticbits.cardshuffling.rankcheckers.IRankChecker;
 public class ShuffleSimulation {
 	private final List<IRankChecker> rankCheckers;
 	private final int numTrials;
-	private final int maxSubtrials;
+	private final int sequenceLength;
 	private final IShuffle shuffle;
 	private final File outputFile;
 	private final Random rnd;
 
-
 	/**
-	 * Given one shuffle algorithm, perform a shuffle for
+	 * Given one shuffle algorithm, perform a shuffle for the sequenceLength times sequentially. After each
+	 * shuffle, compare the ranks to the original deck. Do all that numTrials of times.
 	 * @param shuffle
 	 * @param rankCheckers
 	 * @param numTrials
-	 * @param maxSubtrials
+	 * @param sequenceLength
 	 * @param output
 	 * @param rnd
 	 */
-	public ShuffleSimulation(IShuffle shuffle, List<IRankChecker> rankCheckers, int numTrials, int maxSubtrials, File output, Random rnd) {
+	public ShuffleSimulation(IShuffle shuffle, List<IRankChecker> rankCheckers, int numTrials, int sequenceLength, File output, Random rnd) {
 		this.shuffle = shuffle;
 		this.rankCheckers = rankCheckers;
 		this.numTrials = numTrials;
-		this.maxSubtrials = maxSubtrials;
+		this.sequenceLength = sequenceLength;
 		this.outputFile = output;
 		this.rnd = rnd;
 	}
@@ -59,15 +59,15 @@ public class ShuffleSimulation {
 
 	public void run() throws IOException {
 		FileWriter output = new FileWriter(outputFile);
-		output.write("Shuffle\tTrial\tSubTrial\tRankChecker\tRankCheckerValue\n");
+		output.write("Shuffle\tTrial\tSequenceIndex\tRankChecker\tRankCheckerValue\n");
 		for (int trial = 0; trial < numTrials; trial++) {
-			for (int subTrial = 0; subTrial < maxSubtrials; subTrial++) {
-				List<PlayingCard> beforeDeck = newRandomDeck();
-				List<PlayingCard> afterDeck = new ArrayList<PlayingCard>(beforeDeck);
-				afterDeck = shuffle.shuffle(afterDeck);
-				for (IRankChecker checker : rankCheckers) {
+			List<PlayingCard> beforeDeck = newRandomDeck(); // fresh deck
+			for (int seq = 0; seq < sequenceLength; seq++) {
+				List<PlayingCard> afterDeck = new ArrayList<PlayingCard>(beforeDeck); // copy the deck
+				afterDeck = shuffle.shuffle(afterDeck); // shuffle it
+				for (IRankChecker checker : rankCheckers) { // compare the ranks
 					Double rankCheckerValue = checker.compareRanks(beforeDeck, afterDeck);
-					output.write(shuffle.name() + "\t" + trial + "\t" + subTrial + "\t" + checker.name() + "\t" + rankCheckerValue + "\n");
+					output.write(shuffle.name() + "\t" + trial + "\t" + seq + "\t" + checker.name() + "\t" + rankCheckerValue + "\n");
 				}
 			}
 		}
