@@ -63,13 +63,13 @@ public class PlayingCard implements Comparable<PlayingCard> {
 	 * Compare the order to another playing card
 	 */
 	public int compareTo(PlayingCard o) {
-		throw new IllegalStateException("unimplemented!");
+		return Integer.valueOf(getRank()).compareTo(o.getRank());
 	}
 
 	public int getRank() {
 		return value.getNum() + suit.getRank() * 13;
 	}
-	
+
 	public static List<PlayingCard> newDeck() {
 		ArrayList<PlayingCard> newDeck = new ArrayList<PlayingCard>(52);
 		for (Suit suit : Suit.values()) {
@@ -80,4 +80,20 @@ public class PlayingCard implements Comparable<PlayingCard> {
 		return newDeck;
 	}
 
+	public static PlayingCard fromRank(int i) throws DataEntryException {
+		i = i - 1; // make it zero-based
+		int valueRank = i % 13 + 1;
+		return new PlayingCard(Value.fromRank(valueRank), Suit.fromRank(i / 13));
+	}
+
+	public static class NullPlayingCard extends PlayingCard {
+		public NullPlayingCard() {
+			super(null, null);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			return false;
+		}
+	}
 }

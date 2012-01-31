@@ -27,4 +27,12 @@ public enum Suit {
 		}
 		throw new DataEntryException("No suit found for " + text);
 	}
+
+	public static Suit fromRank(int rank) throws DataEntryException {
+		for (Suit suit : values()) {
+			if (suit.rank == rank)
+				return suit;
+		}
+		throw new DataEntryException("No suit found for rank " + rank);
+	}
 }

@@ -3,8 +3,7 @@ package org.chaoticbits.cardshuffling.cards;
 import org.chaoticbits.cardshuffling.entry.DataEntryException;
 
 public enum Value {
-	ACE(1, "a"), TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10), JACK(11,
-			"j"), QUEEN(12, "q"), KING(13, "k");
+	ACE(1, "a"), TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10), JACK(11, "j"), QUEEN(12, "q"), KING(13, "k");
 
 	private final int num;
 	private final String entry;
@@ -33,6 +32,14 @@ public enum Value {
 				return value;
 		}
 		throw new DataEntryException("No card value found for " + text);
+	}
+
+	public static Value fromRank(int rank) throws DataEntryException {
+		for (Value value : values()) {
+			if (value.num == rank)
+				return value;
+		}
+		throw new DataEntryException("No card value found for rank " + rank);
 	}
 
 }
