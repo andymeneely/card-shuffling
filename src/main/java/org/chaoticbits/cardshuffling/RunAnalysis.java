@@ -104,16 +104,12 @@ public class RunAnalysis {
 	private static List<IShuffle> deriveShuffles(List<ShuffleState> states) {
 		List<IShuffle> shuffles = new ArrayList<IShuffle>();
 		for (int i = 0; i < states.size() - 1; i++) {
-			if (inSequence(states, i) && sameShuffleType(states, i)) {
+			if (inSequence(states, i)) {
 				String shuffleName = states.get(i + 1).getDescription();
 				shuffles.add(new EmpiricalShuffle(shuffleName, states.get(i).getDeck(), states.get(i + 1).getDeck()));
 			}
 		}
 		return shuffles;
-	}
-
-	private static boolean sameShuffleType(List<ShuffleState> states, int i) {
-		return ShuffleType.fromString(states.get(i).getDescription()) == ShuffleType.fromString(states.get(i + 1).getDescription());
 	}
 
 	private static boolean inSequence(List<ShuffleState> states, int i) {
