@@ -28,6 +28,7 @@ import org.chaoticbits.cardshuffling.shuffles.EmpiricalShuffle;
 import org.chaoticbits.cardshuffling.shuffles.RandomAlgorithmShuffle;
 import org.chaoticbits.cardshuffling.shuffles.RandomShuffle;
 import org.chaoticbits.cardshuffling.shuffles.ShuffleType;
+import org.chaoticbits.cardshuffling.visualize.NetworkVisualize;
 import org.chaoticbits.cardshuffling.visualize.VisualizeShuffle;
 
 public class RunAnalysis {
@@ -118,6 +119,7 @@ public class RunAnalysis {
 
 	private static <T> void buildVisuals(List<IShuffle> shuffles) throws IOException {
 		new VisualizeShuffle().run(shuffles);
+		new NetworkVisualize().run(shuffles);
 	}
 
 	private static void randomSimulations(Random random) throws IOException {
