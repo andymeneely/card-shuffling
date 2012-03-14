@@ -104,7 +104,7 @@ ad
 10d
 6d
 6h
-:Overhead 102
+:Overhand 102
 7s
 4c
 5c
